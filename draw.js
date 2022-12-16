@@ -72,6 +72,13 @@ function BarChart(data, {
           .attr("fill", "currentColor")
           .attr("text-anchor", "start")
           .text(yLabel));
+  
+  svg.append("text")
+      .attr("x", (width / 2))             
+      .attr("y", 20)
+      .attr("text-anchor", "middle")  
+      .style("font-size", "16px") 
+      .text(data[0].quarter + "," + data[0].courseLevel + "," + data[0].course + "," + data[0].instructor); 
 
   const bar = svg.append("g")
       .attr("fill", color)
@@ -104,7 +111,11 @@ d3.csv("grades.csv",function(d){
         studentCount: +d.Sum_of_Student_Count
     }
 }).then(function(data){
-  var target = findCourse(data,"S22","Undergraduate","ANTH      2","WALSH C");
+  var quarter = "S22";
+  var courseLevel = "Undergraduate";
+  var course = "ANTH      2";
+  var instructor = "WALSH C";
+  var target = findCourse(data,quarter,courseLevel,course,instructor);
 
   console.log(target);
 
@@ -116,5 +127,7 @@ d3.csv("grades.csv",function(d){
     height: 300,
     color: "steelblue"
   });
+
+  //append the chart to the body of the html page
   document.body.appendChild(chart);
 });
