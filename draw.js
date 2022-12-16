@@ -1,29 +1,10 @@
-
-
-//loading the data
-// Quarter,Course_Level,Course,Instructor,Grade_Given,Sum_of_Student_Count
-const grades = d3.csv("/data/grades.csv",function(d){
-    return {
-        quarter: d.Quarter,
-        courseLevel: d.Course_Level,
-        course: d.Course,
-        instructor: d.Instructor,
-        grade: d.Grade_Given,
-        studentCount: +d.Sum_of_Student_Count
-    }
-});
-var data = await grades;
-
 function findCourse(da,quarter,courseLevel,course,instructor){
-    var course = da.filter(function(d){
-        return d.quarter == quarter && d.courseLevel == courseLevel && d.course == course && d.instructor == instructor
-    })
-    return course
-};
+  var course = da.filter(function(d){
+      return d.quarter == quarter && d.courseLevel == courseLevel && d.course == course && d.instructor == instructor
+  })
+  return course
+}
 
-var target = findCourse(data,"S22","Undergraduate","ANTH      2","WALSH C");
-console.log(target);
-/*
 function BarChart(data, {
   x = (d, i) => i, // given d in data, returns the (ordinal) x-value
   y = d => d, // given d in data, returns the (quantitative) y-value
@@ -108,18 +89,33 @@ function BarChart(data, {
   svg.append("g")
       .attr("transform", `translate(0,${height - marginBottom})`)
       .call(xAxis);
-
   return svg.node();
 };
 
-chart = BarChart(target, {
-  x: d => d.grade,
-  y: d => d.studentCount,
-  xDomain: d3.groupSort(grade, ([d]) => -d.studentCount, d => d.grade), // sort by descending studentCount
-  yFormat: "%",
-  yLabel: "↑ studentCount",
-  width,
-  height: 500,
-  color: "steelblue"
+//loading the data
+// Quarter,Course_Level,Course,Instructor,Grade_Given,Sum_of_Student_Count
+d3.csv("/data/grades.csv",function(d){
+    return {
+        quarter: d.Quarter,
+        courseLevel: d.Course_Level,
+        course: d.Course,
+        instructor: d.Instructor,
+        grade: d.Grade_Given,
+        studentCount: +d.Sum_of_Student_Count
+    }
+}).then(function(data){
+  var target = findCourse(data,"S22","Undergraduate","ANTH      2","WALSH C");
+
+  console.log(target);
+
+  chart = BarChart(target, {
+    x: d => d.grade,
+    y: d => d.studentCount,
+    xDomain: d3.groupSort(target, ([d]) => -d.studentCount, d => d.grade), // sort by descending studentCount
+    yLabel: "studentCount",
+    width: 960,
+    height: 500,
+    color: "steelblue"
+  });
+  document.body.appendChild(chart);
 });
-*/
