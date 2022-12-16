@@ -94,7 +94,7 @@ function BarChart(data, {
 
 //loading the data
 // Quarter,Course_Level,Course,Instructor,Grade_Given,Sum_of_Student_Count
-d3.csv("/data/grades.csv",function(d){
+d3.csv("grades.csv",function(d){
     return {
         quarter: d.Quarter,
         courseLevel: d.Course_Level,
@@ -111,10 +111,9 @@ d3.csv("/data/grades.csv",function(d){
   chart = BarChart(target, {
     x: d => d.grade,
     y: d => d.studentCount,
-    xDomain: d3.groupSort(target, ([d]) => -d.studentCount, d => d.grade), // sort by descending studentCount
-    yLabel: "studentCount",
-    width: 960,
-    height: 500,
+    yLabel: "#Student",
+    width: 500,
+    height: 300,
     color: "steelblue"
   });
   document.body.appendChild(chart);
