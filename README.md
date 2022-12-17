@@ -10,9 +10,11 @@ For now, the visualization is made with d3.js, so to build yourself run
 npm install d3
 ```
 
-## Questions to Answer
+## Meta Analysis
 
-- What professor most likely to give A's
+I tried to answer the following questions in the [analysis page](https://sir-teo.github.io/visualizing-grades/analysis.html)
+
+- Which professor tend to give A's
 - Do GPA inflation exist in UCSB?
 - What are the hardest courses/easiest courses?
 - The average gpa per major
