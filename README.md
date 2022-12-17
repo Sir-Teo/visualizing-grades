@@ -9,3 +9,8 @@ For now, the visualization is made with d3.js, so to build yourself run
 ```
 npm install d3
 ```
+
+## Questions to Answer
+
+- What professor most likely to give A's
+- Do GPA inflation exist in UCSB
