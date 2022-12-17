@@ -13,4 +13,7 @@ npm install d3
 ## Questions to Answer
 
 - What professor most likely to give A's
-- Do GPA inflation exist in UCSB
+- Do GPA inflation exist in UCSB?
+- What are the hardest courses/easiest courses?
+- The average gpa per major
+- How hard it is to get an A/ fail a course in a department?
