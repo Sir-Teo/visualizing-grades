@@ -107,7 +107,7 @@ The top A rate majors are **Muisc Performance Laboratories**, **Military Science
 
 The top fail rate majors are **Astronomy**, **Math**, **Chemistry**, **MCDB**, **PSTAT**, **Psychology**, **EEMB**.
 
-- Do GPA inflation exist at UCSB?
+### Do GPA inflation exist at UCSB?
 
 #### A rate by quarter
 
