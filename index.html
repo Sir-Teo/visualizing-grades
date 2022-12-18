@@ -4,13 +4,57 @@
 	<meta charset="UTF-8">
 	<script src="https://d3js.org/d3.v7.min.js"></script>
 	<title>Visualizing Grades</title>
-	<p>Hello. Welcome to this website. For a exploratory data analysis report, click <a href="analysis.html"> Here </a> </p>
+	<p>Hello. Welcome to this website. Input information below and click submit</p>
 </head>
 <body>
+	<script>
+		$( function() {
+		  var availableTags = [
+			"ActionScript",
+			"AppleScript",
+			"Asp",
+			"BASIC",
+			"C",
+			"C++",
+			"Clojure",
+			"COBOL",
+			"ColdFusion",
+			"Erlang",
+			"Fortran",
+			"Groovy",
+			"Haskell",
+			"Java",
+			"JavaScript",
+			"Lisp",
+			"Perl",
+			"PHP",
+			"Python",
+			"Ruby",
+			"Scala",
+			"Scheme"
+		  ];
+		  $( "#tags" ).autocomplete({
+			source: availableTags
+		  });
+		} );
+		</script>
+	
+	<div class="ui-widget">
+		<label for="quarter">Quarter </label>
+		<input id="quarter">
+		<label for="course-level">Course Level:  </label>
+		<input id="course-level">
+		<label for="course">Course Name: </label>
+		<input id="course">
+		<label for="instructor">Instructor: </label>
+		<input id="instructor">
+		<input type="button" value="Render" onclick="submitCourse()" />
+	</div>
 	<script src="draw.js"> </script>
-
-
-
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/demos/style.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
 </body>
 </html>
