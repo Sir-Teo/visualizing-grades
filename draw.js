@@ -99,35 +99,39 @@ function BarChart(data, {
   return svg.node();
 };
 
-//loading the data
-// Quarter,Course_Level,Course,Instructor,Grade_Given,Sum_of_Student_Count
-d3.csv("grades.csv",function(d){
-    return {
-        quarter: d.Quarter,
-        courseLevel: d.Course_Level,
-        course: d.Course,
-        instructor: d.Instructor,
-        grade: d.Grade_Given,
-        studentCount: +d.Sum_of_Student_Count
-    }
-}).then(function(data){
-  var quarter = "S22";
-  var courseLevel = "Undergraduate";
-  var course = "ANTH      2";
-  var instructor = "WALSH C";
-  var target = findCourse(data,quarter,courseLevel,course,instructor);
 
-  console.log(target);
+function submitCourse() {
+  var quarter = document.getElementById('quarter').value;;
+  var courseLevel = document.getElementById('course-level').value;
+  var course = document.getElementById('course').value;
+  var instructor = document.getElementById('instructor').value;
 
-  chart = BarChart(target, {
-    x: d => d.grade,
-    y: d => d.studentCount,
-    yLabel: "#Student",
-    width: 500,
-    height: 300,
-    color: "steelblue"
+  //loading the data
+  // Quarter,Course_Level,Course,Instructor,Grade_Given,Sum_of_Student_Count
+  d3.csv("grades.csv",function(d){
+      return {
+          quarter: d.Quarter,
+          courseLevel: d.Course_Level,
+          course: d.Course,
+          instructor: d.Instructor,
+          grade: d.Grade_Given,
+          studentCount: +d.Sum_of_Student_Count
+      }
+  }).then(function(data){
+    var target = findCourse(data,quarter,courseLevel,course,instructor);
+
+    console.log(target);
+
+    chart = BarChart(target, {
+      x: d => d.grade,
+      y: d => d.studentCount,
+      yLabel: "#Student",
+      width: 500,
+      height: 300,
+      color: "steelblue"
+    });
+
+    //append the chart to the body of the html page
+    document.body.appendChild(chart);
   });
-
-  //append the chart to the body of the html page
-  document.body.appendChild(chart);
-});
+}
