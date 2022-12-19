@@ -5,11 +5,27 @@ function findCourse(da,quarter,courseLevel,course,instructor){
   return course
 }
 
+function readTextFile(file, callback) {
+  var rawFile = new XMLHttpRequest();
+  rawFile.overrideMimeType("application/json");
+  rawFile.open("GET", file, true);
+  rawFile.onreadystatechange = function() {
+      if (rawFile.readyState === 4 && rawFile.status == "200") {
+          callback(rawFile.responseText);
+      }
+  }
+  rawFile.send(null);
+}
+
 function searchCourse(){
   var quarter = document.getElementById('quarter').value;;
   var courseLevel = document.getElementById('course-level').value;
   var course = document.getElementById('course').value;
   var instructor = document.getElementById('instructor').value;
+  readTextFile("./courses.json", function(text){
+    var data = JSON.parse(text);
+    
+});
 }
 
 function BarChart(data, {
