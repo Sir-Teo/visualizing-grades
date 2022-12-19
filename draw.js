@@ -132,6 +132,6 @@ function submitCourse() {
     });
 
     //append the chart to the body of the html page
-    document.body.appendChild(chart);
+    document.getElementById("right-page").appendChild(chart);
   });
 }

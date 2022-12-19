@@ -7,53 +7,108 @@
 	<p>Hello. Welcome to this website. Input information below and click submit</p>
 </head>
 <body>
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-	<link rel="stylesheet" href="/resources/demos/style.css">
-	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-	<script>
-		$( function() {
-		  var availableTags = [
-			"ActionScript",
-			"AppleScript",
-			"Asp",
-			"BASIC",
-			"C",
-			"C++",
-			"Clojure",
-			"COBOL",
-			"ColdFusion",
-			"Erlang",
-			"Fortran",
-			"Groovy",
-			"Haskell",
-			"Java",
-			"JavaScript",
-			"Lisp",
-			"Perl",
-			"PHP",
-			"Python",
-			"Ruby",
-			"Scala",
-			"Scheme"
-		  ];
-		  $( "#quarter" ).autocomplete({
-			source: availableTags
-		  });
-		} );
-		</script>
-	
-	<div class="ui-widget">
-		<label for="quarter">Quarter </label>
-		<input id="quarter">
-		<label for="course-level">Course Level:  </label>
-		<input id="course-level">
-		<label for="course">Course Name: </label>
-		<input id="course">
-		<label for="instructor">Instructor: </label>
-		<input id="instructor">
-		<input type="button" value="Render" onclick="submitCourse()" />
-	</div>
-	<script src="draw.js"> </script>
+
+	<div class="pagerow">
+		<div id = "left-page" class="pagecolumn" style="background-color:#aaa;">
+			<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+			<link rel="stylesheet" href="/resources/demos/style.css">
+			<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+			<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+			<script>
+				$( function() {
+				var availableTags = [
+					"ActionScript",
+					"AppleScript",
+					"Asp",
+					"BASIC",
+					"C",
+					"C++",
+					"Clojure",
+					"COBOL",
+					"ColdFusion",
+					"Erlang",
+					"Fortran",
+					"Groovy",
+					"Haskell",
+					"Java",
+					"JavaScript",
+					"Lisp",
+					"Perl",
+					"PHP",
+					"Python",
+					"Ruby",
+					"Scala",
+					"Scheme"
+				];
+				$( "#quarter" ).autocomplete({
+					source: availableTags
+				});
+				} );
+			</script>
+		
+			<div class="ui-widget">
+				<label for="quarter">Quarter </label>
+				<input id="quarter">
+				<label for="course-level">Course Level:  </label>
+				<input id="course-level">
+				<label for="course">Course Name: </label>
+				<input id="course">
+				<label for="instructor">Instructor: </label>
+				<input id="instructor">
+				<input type="button" value="Render" onclick="submitCourse()" />
+			</div>
+
+			<link rel="stylesheet" href="style.css">
+
+			<div class="row">
+				<div class="column">
+				<div class="card">
+					<h3>Card 1</h3>
+					<p>Some text</p>
+					<p>Some text</p>
+				</div>
+				</div>
+				<div class="column">
+					<div class="card">
+					<h3>Card 1</h3>
+					<p>Some text</p>
+					<p>Some text</p>
+					</div>
+				</div>
+				<div class="column">
+					<div class="card">
+					<h3>Card 1</h3>
+					<p>Some text</p>
+					<p>Some text</p>
+					</div>
+				</div>
+				<div class="column">
+					<div class="card">
+					<h3>Card 1</h3>
+					<p>Some text</p>
+					<p>Some text</p>
+					</div>
+				</div>
+				<div class="column">
+					<div class="card">
+					<h3>Card 1</h3>
+					<p>Some text</p>
+					<p>Some text</p>
+					</div>
+				</div>
+				<div class="column">
+					<div class="card">
+					<h3>Card 1</h3>
+					<p>Some text</p>
+					<p>Some text</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id = "right-page" class="pagecolumn" style="background-color:#bbb;">
+		  <h2>Graphs Rendered Here</h2>
+		  <script src="draw.js"> </script>
+		</div>
+	  </div>
 </body>
 </html>
