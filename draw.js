@@ -5,6 +5,13 @@ function findCourse(da,quarter,courseLevel,course,instructor){
   return course
 }
 
+function searchCourse(){
+  var quarter = document.getElementById('quarter').value;;
+  var courseLevel = document.getElementById('course-level').value;
+  var course = document.getElementById('course').value;
+  var instructor = document.getElementById('instructor').value;
+}
+
 function BarChart(data, {
   x = (d, i) => i, // given d in data, returns the (ordinal) x-value
   y = d => d, // given d in data, returns the (quantitative) y-value
@@ -100,11 +107,7 @@ function BarChart(data, {
 };
 
 
-function submitCourse() {
-  var quarter = document.getElementById('quarter').value;;
-  var courseLevel = document.getElementById('course-level').value;
-  var course = document.getElementById('course').value;
-  var instructor = document.getElementById('instructor').value;
+function submitCourse(quarter,courseLevel,course,instructor) {
 
   //loading the data
   // Quarter,Course_Level,Course,Instructor,Grade_Given,Sum_of_Student_Count
