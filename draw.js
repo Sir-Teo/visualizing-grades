@@ -23,8 +23,34 @@ function searchCourse(){
   var course = document.getElementById('course').value;
   var instructor = document.getElementById('instructor').value;
   readTextFile("./courses.json", function(text){
-    var data = JSON.parse(text);
-    
+  var data = JSON.parse(text);
+  const options = {
+    // isCaseSensitive: false,
+    // includeScore: false,
+     shouldSort: true,
+     //includeMatches: true,
+     //findAllMatches: true,
+    // minMatchCharLength: 1,
+    // location: 0,
+     threshold: 0.4,
+    // distance: 100,
+    // useExtendedSearch: false,
+    // ignoreLocation: false,
+    // ignoreFieldNorm: false,
+    // fieldNormWeight: 1,
+    limit:20,
+    keys: [
+      "Course", "Instructor", "Quarter", "Course_Level"
+    ]
+  };
+  
+  const fuse = new Fuse(data, options);
+  
+  const result = fuse.search({
+    $or: [{ Course: course }, { Instructor: instructor },{ Quarter: quarter },{ Course_Level: courseLevel}]
+  });
+  console.log(result);
+  $("#cards").html($('#cards').html() + "<div class=\"column\"><div class=\"card\"><p>Some text</p></div></div>");
 });
 }
 
