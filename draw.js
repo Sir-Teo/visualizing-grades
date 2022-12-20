@@ -59,12 +59,9 @@ function searchCourse(){
   }
   else{
     for (var i = 0; i <= MAXDISPLAYNUM; i++){
-      $("#cards").html($('#cards').html() + "<div class=\"column\"><div class=\"card\"><p>"+ result[i].item.Quarter + ", " +  result[i].item.Course_Level + ", " + result[i].item.Course  + ", " + result[i].item.Instructor + "</p></div></div>");
+      $("#cards").html($('#cards').html() + "<div class=\"column\"><div class=\"card\"><p id = \"card"+i+"\">" + result[i].item.Quarter + ", " +  result[i].item.Course_Level + ", " + result[i].item.Course  + ", " + result[i].item.Instructor + "</p>"+ "<input type=\"button\" value=\"Render\" onclick=\"drawCourse("+ "\'"+result[i].item.Quarter+ "\'"+ "," +"\'"+result[i].item.Course_Level+ "\'"+"," +"\'"+result[i].item.Course+ "\'"+"," +"\'"+result[i].item.Instructor+ "\'"+")\" />" +"</div></div>");
     }
   }
-
-
-  console.log(result[0].item);
 });
 }
 
@@ -73,7 +70,7 @@ function clearSearch(){
 };
 
 function clearRender(){
-  document.getElementById("right-page").innerHTML = "";
+  $("#graphs").html("");
 }
 
 function BarChart(data, {
@@ -171,7 +168,7 @@ function BarChart(data, {
 };
 
 
-function submitCourse(quarter,courseLevel,course,instructor) {
+function drawCourse(quarter,courseLevel,course,instructor) {
 
   //loading the data
   // Quarter,Course_Level,Course,Instructor,Grade_Given,Sum_of_Student_Count
@@ -199,6 +196,6 @@ function submitCourse(quarter,courseLevel,course,instructor) {
     });
 
     //append the chart to the body of the html page
-    document.getElementById("right-page").appendChild(chart);
+    document.getElementById("graphs").appendChild(chart);
   });
 }
