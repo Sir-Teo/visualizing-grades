@@ -32,9 +32,9 @@ function searchCourse(){
      shouldSort: true,
      includeMatches: true,
      findAllMatches: true,
-     minMatchCharLength: 3,
+    //minMatchCharLength: 3,
     // location: 0,
-     threshold: 0.5,
+     threshold: 0.6,
     //distance: 5,
     // useExtendedSearch: false,
     // ignoreLocation: false,
@@ -42,14 +42,16 @@ function searchCourse(){
     // fieldNormWeight: 1,
     limit:50,
     keys: [
-      "Course", "Instructor", "Quarter", "Course_Level"
+      "Course", "Instructor", "Quarter", "Course_Level","Department","Course_Number"
     ]
   };
   
   const fuse = new Fuse(data, options);
   
   const result = fuse.search({
-    $or: [{ Course: course }, { Instructor: instructor },{ Quarter: quarter },{ Course_Level: courseLevel}]
+    $and:[ {Course_Number: "\'"+courseNumber},
+    {$or: [{ Course: course }, { Instructor: instructor },{ Quarter: quarter },{ Course_Level: courseLevel}]}
+    ]
   });
 
   const MAXDISPLAYNUM = 50;
@@ -172,14 +174,16 @@ function drawCourse(quarter,courseLevel,course,instructor) {
 
   //loading the data
   // Quarter,Course_Level,Course,Instructor,Grade_Given,Sum_of_Student_Count
-  d3.csv("grades.csv",function(d){
+  d3.csv("grades2.csv",function(d){
       return {
           quarter: d.Quarter,
           courseLevel: d.Course_Level,
           course: d.Course,
           instructor: d.Instructor,
           grade: d.Grade_Given,
-          studentCount: +d.Sum_of_Student_Count
+          studentCount: +d.Sum_of_Student_Count,
+          courseNumber: d.Course_Number,
+          department: d.Department
       }
   }).then(function(data){
     var target = findCourse(data,quarter,courseLevel,course,instructor);
