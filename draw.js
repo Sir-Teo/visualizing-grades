@@ -113,7 +113,7 @@ function BarChart(data, {
   // Reorder X, Y
   var newX = [];
   var newY = [];
-  const possibleGrades = ["A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "D-", "F"];
+  const possibleGrades = ["A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "D-", "F","P","NP"];
   for (var j = 0; j < possibleGrades.length; j++){
     for (var i = 0; i < X.length; i++){
       if (X[i] == possibleGrades[j]){
