@@ -4,7 +4,8 @@
 	<meta charset="UTF-8">
 	<script src="https://d3js.org/d3.v7.min.js"></script>
 	<title>Visualizing Grades</title>
-	<p>Hello. Welcome to this website. Input information below and click submit. You dont need to enter all the fields. The dataset contains all grades from Fall 2009 to Spring 2022</p>
+	<p>Hello. Welcome to this website. Input information below and click submit. The dataset contains all grades from Fall 2009 to Spring 2022</p>
+	<b>You dont need to enter all the fields.</b> 
 </head>
 <body>
 
@@ -166,10 +167,10 @@
 				</select>
 				<label for="course-number">Course No. </label>
 				<input id="course-number">
-				<label for="instructor">Instructor: </label>
+				<label for="instructor">Instructor Last Name: </label>
 				<input id="instructor">
 				<input type="button" value="Search" onclick="searchCourse()" />
-				<input type="button" value="Clear" onclick="clearSearch()" />
+				<input type="button" value="Clear Below" onclick="clearSearch()" />
 			</div>
 
 			<link rel="stylesheet" href="style.css">
@@ -180,7 +181,7 @@
 		</div>
 		<div id = "right-page" class="pagecolumn" style="background-color:#bbb;">
 		  <h2>Graphs Renders Here</h2>
-		  <input type="button" value="Clear" onclick="clearRender()" />
+		  <input type="button" value="Clear Below" onclick="clearRender()" />
 		  <script src="draw.js"> </script>
 		  <div id = 'graphs' class="row">
 			Graphs show here	

@@ -32,7 +32,7 @@ function searchCourse(){
      shouldSort: true,
      includeMatches: true,
      findAllMatches: true,
-    //minMatchCharLength: 3,
+    minMatchCharLength: 2,
     // location: 0,
      threshold: 0.6,
     //distance: 5,
@@ -40,7 +40,7 @@ function searchCourse(){
     // ignoreLocation: false,
     // ignoreFieldNorm: false,
     // fieldNormWeight: 1,
-    limit:50,
+    //limit:50,
     keys: [
       "Course", "Instructor", "Quarter", "Course_Level","Department","Course_Number"
     ]
@@ -51,12 +51,20 @@ function searchCourse(){
     var result = fuse.search({
       $or: [{ Course: course }, { Instructor: instructor },{ Quarter: quarter },{ Course_Level: courseLevel}]
     });
-  }else{
+    console.log(1);
+  }else if (dept != ""){
     var result = fuse.search({
-    $and:[ {Course_Number: "\'"+courseNumber},
+      $and:[ {Department: "^"+dept},{Course_Number: courseNumber}]
+    });
+    console.log(2);
+  }
+  else{
+    var result = fuse.search({
+    $and:[ {Course_Number: "\="+courseNumber},
     {$or: [{ Course: course }, { Instructor: instructor },{ Quarter: quarter },{ Course_Level: courseLevel}]}
     ]
-  });}
+  });
+  console.log(3);}
 
   const MAXDISPLAYNUM = 50;
 

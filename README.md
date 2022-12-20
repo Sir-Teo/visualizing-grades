@@ -10,6 +10,18 @@ For now, the visualization is made with d3.js, so to build yourself run
 npm install d3
 ```
 
+and 
+
+```
+npm install fuse.js
+```
+
+## Files
+
+- `\notebook` contains the notebooks for analysis scripts
+- `\grades2.csv` is the data
+- `index.html` is the index page
+
 ## Exploratory Data Analysis
 
 I tried to answer the some "big questions" like "Are there GPA inflations." with simple data analysis. To see the code that generate the graph, please see this [analysis page](https://sir-teo.github.io/visualizing-grades/analysis.html). 
