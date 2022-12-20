@@ -51,12 +51,10 @@ function searchCourse(){
     var result = fuse.search({
       $or: [{ Course: course }, { Instructor: instructor },{ Quarter: quarter },{ Course_Level: courseLevel}]
     });
-    console.log(1);
   }else if (dept != ""){
     var result = fuse.search({
       $and:[ {Department: "^"+dept},{Course_Number: courseNumber}]
     });
-    console.log(2);
   }
   else{
     var result = fuse.search({
@@ -64,7 +62,7 @@ function searchCourse(){
     {$or: [{ Course: course }, { Instructor: instructor },{ Quarter: quarter },{ Course_Level: courseLevel}]}
     ]
   });
-  console.log(3);}
+}
 
   const MAXDISPLAYNUM = 50;
 
@@ -136,6 +134,51 @@ function BarChart(data, {
     title = i => T(O[i], i, data);
   }
 
+  // Calculate GPA
+  var sumOfStudent = 0;
+  var sumOfGPA = 0;
+  for (var i = 0; i < Y.length; i++){
+    sumOfStudent += Y[i];
+    if (X[i] == "A" || X[i] == "A+"){
+      sumOfGPA += Y[i]*4;
+    }
+    else if(X[i] == "A-"){
+      sumOfGPA += Y[i]*3.7;
+    }
+    else if(X[i] == "B+"){
+      sumOfGPA += Y[i]*3.3;
+    }
+    else if(X[i] == "B"){
+      sumOfGPA += Y[i]*3;
+    }
+    else if(X[i] == "B-"){
+      sumOfGPA += Y[i]*2.7;
+    }
+    else if(X[i] == "C+"){
+      sumOfGPA += Y[i]*2.3;
+    }
+    else if(X[i] == "C"){
+      sumOfGPA += Y[i]*2;
+    }
+    else if(X[i] == "C-"){
+      sumOfGPA += Y[i]*1.7;
+    }
+    else if(X[i] == "D+"){
+      sumOfGPA += Y[i]*1.3;
+    }
+    else if(X[i] == "D"){
+      sumOfGPA += Y[i]*1;
+    }
+    else if(X[i] == "D-"){
+      sumOfGPA += Y[i]*0.7;
+    }
+    else if(X[i] == "F"){
+      sumOfGPA += Y[i]*0;
+    }
+  }
+  var GPA = sumOfGPA/sumOfStudent;
+  GPA = GPA.toFixed(3);
+
   const svg = d3.create("svg")
       .attr("width", width)
       .attr("height", height)
@@ -154,14 +197,7 @@ function BarChart(data, {
           .attr("y", 10)
           .attr("fill", "currentColor")
           .attr("text-anchor", "start")
-          .text(yLabel));
-  
-  svg.append("text")
-      .attr("x", (width / 2))             
-      .attr("y", 20)
-      .attr("text-anchor", "middle")  
-      .style("font-size", "16px") 
-      .text(data[0].quarter + "," + data[0].courseLevel + "," + data[0].course + "," + data[0].instructor); 
+          .text(yLabel)); 
 
   const bar = svg.append("g")
       .attr("fill", color)
@@ -179,6 +215,21 @@ function BarChart(data, {
   svg.append("g")
       .attr("transform", `translate(0,${height - marginBottom})`)
       .call(xAxis);
+
+  svg.append("text")
+      .attr("x", (width / 2))             
+      .attr("y", 20)
+      .attr("text-anchor", "middle")  
+      .style("font-size", "14px") 
+      .text(data[0].quarter + "," + data[0].courseLevel + "," + data[0].course + "," + data[0].instructor); 
+
+  svg.append("text")
+      .attr("x", (width / 2)+40)             
+      .attr("y", 40)
+      .attr("text-anchor", "middle")  
+      .style("font-size", "14px") 
+      .text("Average GPA: " + GPA);
+      
   return svg.node();
 };
 
@@ -200,8 +251,6 @@ function drawCourse(quarter,courseLevel,course,instructor) {
       }
   }).then(function(data){
     var target = findCourse(data,quarter,courseLevel,course,instructor);
-
-    console.log(target);
 
     chart = BarChart(target, {
       x: d => d.grade,

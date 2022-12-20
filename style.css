@@ -53,3 +53,5 @@ body {
     display: table;
     clear: both;
   }
+
+label { display: block; width: 200px; }
