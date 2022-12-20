@@ -47,12 +47,16 @@ function searchCourse(){
   };
   
   const fuse = new Fuse(data, options);
-  
-  const result = fuse.search({
+  if (courseNumber==""){
+    var result = fuse.search({
+      $or: [{ Course: course }, { Instructor: instructor },{ Quarter: quarter },{ Course_Level: courseLevel}]
+    });
+  }else{
+    var result = fuse.search({
     $and:[ {Course_Number: "\'"+courseNumber},
     {$or: [{ Course: course }, { Instructor: instructor },{ Quarter: quarter },{ Course_Level: courseLevel}]}
     ]
-  });
+  });}
 
   const MAXDISPLAYNUM = 50;
 
@@ -60,6 +64,7 @@ function searchCourse(){
     $("#cards").html("No result found");
   }
   else{
+    $("#cards").html("");
     for (var i = 0; i <= MAXDISPLAYNUM; i++){
       $("#cards").html($('#cards').html() + "<div class=\"column\"><div class=\"card\"><p id = \"card"+i+"\">" + result[i].item.Quarter + ", " +  result[i].item.Course_Level + ", " + result[i].item.Course  + ", " + result[i].item.Instructor + "</p>"+ "<input type=\"button\" value=\"Render\" onclick=\"drawCourse("+ "\'"+result[i].item.Quarter+ "\'"+ "," +"\'"+result[i].item.Course_Level+ "\'"+"," +"\'"+result[i].item.Course+ "\'"+"," +"\'"+result[i].item.Instructor+ "\'"+")\" />" +"</div></div>");
     }
