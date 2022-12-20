@@ -20,7 +20,9 @@ function readTextFile(file, callback) {
 function searchCourse(){
   var quarter = document.getElementById('quarter').value;;
   var courseLevel = document.getElementById('course-level').value;
-  var course = document.getElementById('course').value;
+  var dept = document.getElementById('dept').value;
+  var courseNnumber = document.getElementById('course-number').value;
+  var course = dept + " " + courseNnumber;
   var instructor = document.getElementById('instructor').value;
   readTextFile("./courses.json", function(text){
   var data = JSON.parse(text);
@@ -28,17 +30,17 @@ function searchCourse(){
     // isCaseSensitive: false,
     // includeScore: false,
      shouldSort: true,
-     //includeMatches: true,
-     //findAllMatches: true,
-    // minMatchCharLength: 1,
+     includeMatches: true,
+     findAllMatches: true,
+     minMatchCharLength: 3,
     // location: 0,
-     threshold: 0.4,
-    // distance: 100,
+     threshold: 0.5,
+    //distance: 5,
     // useExtendedSearch: false,
     // ignoreLocation: false,
     // ignoreFieldNorm: false,
     // fieldNormWeight: 1,
-    limit:20,
+    limit:50,
     keys: [
       "Course", "Instructor", "Quarter", "Course_Level"
     ]
@@ -49,9 +51,29 @@ function searchCourse(){
   const result = fuse.search({
     $or: [{ Course: course }, { Instructor: instructor },{ Quarter: quarter },{ Course_Level: courseLevel}]
   });
-  console.log(result);
-  $("#cards").html($('#cards').html() + "<div class=\"column\"><div class=\"card\"><p>Some text</p></div></div>");
+
+  const MAXDISPLAYNUM = 50;
+
+  if (result.length == 0){
+    $("#cards").html("No result found");
+  }
+  else{
+    for (var i = 0; i <= MAXDISPLAYNUM; i++){
+      $("#cards").html($('#cards').html() + "<div class=\"column\"><div class=\"card\"><p>"+ result[i].item.Quarter + ", " +  result[i].item.Course_Level + ", " + result[i].item.Course  + ", " + result[i].item.Instructor + "</p></div></div>");
+    }
+  }
+
+
+  console.log(result[0].item);
 });
+}
+
+function clearSearch(){
+  $("#cards").html("");
+};
+
+function clearRender(){
+  document.getElementById("right-page").innerHTML = "";
 }
 
 function BarChart(data, {

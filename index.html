@@ -18,39 +18,170 @@
 		
 			<div class="ui-widget">
 				<label for="quarter">Quarter </label>
-				<input id="quarter">
-				<label for="course-level">Course Level:  </label>
-				<input id="course-level">
-				<label for="course">Course Name: </label>
-				<input id="course">
+				<select id="quarter" >
+					<option disabled selected value> -- select an option -- </option>
+					<option value = "S22" > S22 </option>
+					<option value = "W22" > W22 </option>
+					<option value = "F21" > F21 </option>
+					<option value = "M21" > M21 </option>
+					<option value = "W21" > W21 </option>
+					<option value = "S21" > S21 </option>
+					<option value = "F20" > F20 </option>
+					<option value = "M20" > M20 </option>
+					<option value = "S20" > S20 </option>
+					<option value = "W20" > W20 </option>
+					<option value = "F19" > F19 </option>
+					<option value = "M19" > M19 </option>
+					<option value = "S19" > S19 </option>
+					<option value = "W19" > W19 </option>
+					<option value = "F18" > F18 </option>
+					<option value = "M18" > M18 </option>
+					<option value = "S18" > S18 </option>
+					<option value = "W18" > W18 </option>
+					<option value = "F17" > F17 </option>
+					<option value = "M17" > M17 </option>
+					<option value = "S17" > S17 </option>
+					<option value = "W17" > W17 </option>
+					<option value = "F16" > F16 </option>
+					<option value = "M16" > M16 </option>
+					<option value = "S16" > S16 </option>
+					<option value = "W16" > W16 </option>
+					<option value = "F15" > F15 </option>
+					<option value = "M15" > M15 </option>
+					<option value = "S15" > S15 </option>
+					<option value = "W15" > W15 </option>
+					<option value = "F14" > F14 </option>
+					<option value = "M14" > M14 </option>
+					<option value = "S14" > S14 </option>
+					<option value = "W14" > W14 </option>
+					<option value = "F13" > F13 </option>
+					<option value = "M13" > M13 </option>
+					<option value = "S13" > S13 </option>
+					<option value = "W13" > W13 </option>
+					<option value = "F12" > F12 </option>
+					<option value = "M12" > M12 </option>
+					<option value = "S12" > S12 </option>
+					<option value = "W12" > W12 </option>
+					<option value = "F11" > F11 </option>
+					<option value = "M11" > M11 </option>
+					<option value = "S11" > S11 </option>
+					<option value = "W11" > W11 </option>
+					<option value = "F10" > F10 </option>
+					<option value = "M10" > M10 </option>
+					<option value = "S10" > S10 </option>
+					<option value = "W10" > W10 </option>
+					<option value = "F09" > F09 </option>
+				</select>
+				<label for="course-level" list = "levels">Course Level:  </label>
+				<select id="course-level">
+					<option disabled selected value> -- select an option -- </option>
+					<option value = "Undergraduate" >Undergraduate</option>
+					<option value = "Graduate" >Graduate</option>
+				</select>
+				<label for="dept">Department: </label>
+				<select id="dept">
+					<option disabled selected value> -- select an option -- </option>
+					<option value = "ANTH "> ANTH  </option>
+					<option value = "ART  "> ART   </option>
+					<option value = "ARTHI"> ARTHI </option>
+					<option value = "ARTST"> ARTST </option>
+					<option value = "AS AM"> AS AM </option>
+					<option value = "ASTRO"> ASTRO </option>
+					<option value = "BIOL "> BIOL  </option>
+					<option value = "BL ST"> BL ST </option>
+					<option value = "BMSE "> BMSE  </option>
+					<option value = "C LIT"> C LIT </option>
+					<option value = "CH E "> CH E  </option>
+					<option value = "CH ST"> CH ST </option>
+					<option value = "CHEM "> CHEM  </option>
+					<option value = "CHIN "> CHIN  </option>
+					<option value = "CLASS"> CLASS </option>
+					<option value = "CMPSC"> CMPSC </option>
+					<option value = "CMPTG"> CMPTG </option>
+					<option value = "CNCSP"> CNCSP </option>
+					<option value = "COMM "> COMM  </option>
+					<option value = "DANCE"> DANCE </option>
+					<option value = "DYNS "> DYNS  </option>
+					<option value = "EACS "> EACS  </option>
+					<option value = "EARTH"> EARTH </option>
+					<option value = "ECE  "> ECE   </option>
+					<option value = "ECON "> ECON  </option>
+					<option value = "ED   "> ED    </option>
+					<option value = "EDS  "> EDS   </option>
+					<option value = "EEMB "> EEMB  </option>
+					<option value = "ENGL "> ENGL  </option>
+					<option value = "ENGR "> ENGR  </option>
+					<option value = "ENV S"> ENV S </option>
+					<option value = "ES   "> ES    </option>
+					<option value = "ESM  "> ESM   </option>
+					<option value = "ESS  "> ESS   </option>
+					<option value = "FAMST"> FAMST </option>
+					<option value = "FEMST"> FEMST </option>
+					<option value = "FLMST"> FLMST </option>
+					<option value = "FR   "> FR    </option>
+					<option value = "GEOG "> GEOG  </option>
+					<option value = "GEOL "> GEOL  </option>
+					<option value = "GER  "> GER   </option>
+					<option value = "GLOBL"> GLOBL </option>
+					<option value = "GPS  "> GPS   </option>
+					<option value = "GRAD "> GRAD  </option>
+					<option value = "GREEK"> GREEK </option>
+					<option value = "HEB  "> HEB   </option>
+					<option value = "HIST "> HIST  </option>
+					<option value = "INT  "> INT   </option>
+					<option value = "ITAL "> ITAL  </option>
+					<option value = "JAPAN"> JAPAN </option>
+					<option value = "KOR  "> KOR   </option>
+					<option value = "LAIS "> LAIS  </option>
+					<option value = "LATIN"> LATIN </option>
+					<option value = "LAWSO"> LAWSO </option>
+					<option value = "LING "> LING  </option>
+					<option value = "LIT  "> LIT   </option>
+					<option value = "MARSC"> MARSC </option>
+					<option value = "MAT  "> MAT   </option>
+					<option value = "MATH "> MATH  </option>
+					<option value = "MATRL"> MATRL </option>
+					<option value = "MCDB "> MCDB  </option>
+					<option value = "ME   "> ME    </option>
+					<option value = "ME ST"> ME ST </option>
+					<option value = "MES  "> MES   </option>
+					<option value = "MS   "> MS    </option>
+					<option value = "MUS  "> MUS   </option>
+					<option value = "MUS A"> MUS A </option>
+					<option value = "PHIL "> PHIL  </option>
+					<option value = "PHYS "> PHYS  </option>
+					<option value = "POL S"> POL S </option>
+					<option value = "PORT "> PORT  </option>
+					<option value = "PSTAT"> PSTAT </option>
+					<option value = "PSY  "> PSY   </option>
+					<option value = "RG ST"> RG ST </option>
+					<option value = "RUSS "> RUSS  </option>
+					<option value = "SHS  "> SHS   </option>
+					<option value = "SLAV "> SLAV  </option>
+					<option value = "SOC  "> SOC   </option>
+					<option value = "SPAN "> SPAN  </option>
+					<option value = "THTR "> THTR  </option>
+					<option value = "TMP  "> TMP   </option>
+					<option value = "W&L  "> W&L   </option>
+					<option value = "WRIT "> WRIT  </option>
+				</select>
+				<label for="course-number">Course No. </label>
+				<input id="course-number">
 				<label for="instructor">Instructor: </label>
 				<input id="instructor">
 				<input type="button" value="Search" onclick="searchCourse()" />
+				<input type="button" value="Clear" onclick="clearSearch()" />
 			</div>
 
 			<link rel="stylesheet" href="style.css">
 
 			<div id = 'cards' class="row">
-				<div class="column">
-				<div class="card">			
-					<p>Some text</p>
-				</div>
-				</div>
-				<div class="column">
-					<div class="card">
-					<p>Some text</p>
-					</div>
-				</div>
-				<div class="column">
-					<div class="card">
-					<p>Some text</p>
-					</div>
-				</div>
-				
+				Courses show here		
 			</div>
 		</div>
 		<div id = "right-page" class="pagecolumn" style="background-color:#bbb;">
 		  <h2>Graphs Renders Here</h2>
+		  <input type="button" value="Clear" onclick="clearRender()" />
 		  <script src="draw.js"> </script>
 		</div>
 	  </div>
