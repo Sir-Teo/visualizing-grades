@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="description" content="A Grade Visualizing Tool for UCSB Students">
+	<meta name="author" content="Teo">
+	<meta name="keywords" content="UCSB, Grade, Visualizing">
 	<script src="https://d3js.org/d3.v7.min.js"></script>
 	<title>Visualizing Grades</title>
-	<p>Hello. Welcome to this website. Input information below and click submit. The dataset contains all grades from Fall 2009 to Spring 2022</p>
+	<p>Hello. Welcome to this website. Input information below and click submit on the left and you will get a distribution bar plot on the right. The dataset contains all grades from Fall 2009 to Spring 2022</p>
 	<b>You dont need to enter all the fields.</b> 
 </head>
 <body>
@@ -15,9 +18,8 @@
 			<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 			<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 			<script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.js"></script>
-		
 			<div class="ui-widget">
-				<label for="quarter" size = 20>Quarter: </label>
+				<label for="quarter" size = 20>Quarter: (optional)</label>
 				<select id="quarter" >
 					<option disabled selected value> -- select an option -- </option>
 					<option value = "S22" > S22 </option>
@@ -72,13 +74,13 @@
 					<option value = "W10" > W10 </option>
 					<option value = "F09" > F09 </option>
 				</select>
-				<label for="course-level" list = "levels">Course Level:  </label>
+				<label for="course-level" list = "levels">Course Level: (Optional) </label>
 				<select id="course-level">
 					<option disabled selected value> -- select an option -- </option>
 					<option value = "Undergraduate" >Undergraduate</option>
 					<option value = "Graduate" >Graduate</option>
 				</select>
-				<label for="dept">Department: </label>
+				<label for="dept">Department: (optional)</label>
 				<select id="dept">
 					<option disabled selected value> -- select an option -- </option>
 					<option value = "ANTH "> ANTH  </option>
@@ -165,10 +167,12 @@
 					<option value = "W&L  "> W&L   </option>
 					<option value = "WRIT "> WRIT  </option>
 				</select>
-				<label for="course-number">Course No. </label>
+				<label for="course-number">Course No. (Number only)</label>
 				<input id="course-number">
+				<script>document.getElementById('course-number').value = '4A';</script>
 				<label for="instructor">Instructor Last Name: </label>
 				<input id="instructor">
+				<script>document.getElementById('instructor').value = 'HAJOUJI';</script>
 				<input type="button" value="Search" onclick="searchCourse()" />
 				<input type="button" value="Clear Below" onclick="clearSearch()" />
 			</div>
