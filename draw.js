@@ -21,8 +21,8 @@ function searchCourse(){
   var quarter = document.getElementById('quarter').value;;
   var courseLevel = document.getElementById('course-level').value;
   var dept = document.getElementById('dept').value;
-  var courseNnumber = document.getElementById('course-number').value;
-  var course = dept + " " + courseNnumber;
+  var courseNumber = document.getElementById('course-number').value;
+  var course = dept + " " + courseNumber;
   var instructor = document.getElementById('instructor').value;
   readTextFile("./courses.json", function(text){
   var data = JSON.parse(text);
