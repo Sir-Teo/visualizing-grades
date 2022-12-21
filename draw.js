@@ -105,7 +105,7 @@ function searchCourse(){
     });
   }else if (dept != ""){
     var result = fuse.search({
-      $and:[ {Department: "^"+dept},{Course_Number: courseNumber}]
+      $and:[ {Department: dept},{Course_Number: courseNumber}]
     });
   }
   else{
