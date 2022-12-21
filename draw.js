@@ -24,6 +24,62 @@ function readTextFile(file, callback) {
   rawFile.send(null);
 }
 
+function searchProfessor(){
+  var instructor = document.getElementById('instructor').value;
+  readTextFile("./courses.json", function(text){
+  var data = JSON.parse(text);
+  const options = {
+    // isCaseSensitive: false,
+    // includeScore: false,
+    shouldSort: true,
+    includeMatches: true,
+    findAllMatches: true,
+    minMatchCharLength: 2,
+    // location: 0,
+     threshold: 0.6,
+    //distance: 5,
+    // useExtendedSearch: false,
+    // ignoreLocation: false,
+    // ignoreFieldNorm: false,
+    // fieldNormWeight: 1,
+    //limit:50,
+    keys: [
+      "Instructor"
+    ]
+  };
+  
+  const fuse = new Fuse(data, options);
+  if (courseNumber==""){
+    var result = fuse.search({
+      $or: [{ Course: course }, { Instructor: instructor },{ Quarter: quarter },{ Course_Level: courseLevel}]
+    });
+  }else if (dept != ""){
+    var result = fuse.search({
+      $and:[ {Department: "^"+dept},{Course_Number: courseNumber}]
+    });
+  }
+  else{
+    var result = fuse.search({
+    $and:[ {Course_Number: "\="+courseNumber},
+    {$or: [{ Course: course }, { Instructor: instructor },{ Quarter: quarter },{ Course_Level: courseLevel}]}
+    ]
+  });
+  }
+
+  const MAXDISPLAYNUM = 50;
+
+  if (result.length == 0){
+    $("#cards").html("No result found");
+  }
+  else{
+    $("#cards").html("");
+    for (var i = 0; i <= MAXDISPLAYNUM; i++){
+      $("#cards").html($('#cards').html() + "<div class=\"column\"><div class=\"card\"><p id = \"card"+i+"\">" + result[i].item.Quarter + ", " +  result[i].item.Course_Level + ", " + result[i].item.Course  + ", " + result[i].item.Instructor + "</p>"+ "<input type=\"button\" value=\"Render\" onclick=\"drawCourse("+ "\'"+result[i].item.Quarter+ "\'"+ "," +"\'"+result[i].item.Course_Level+ "\'"+"," +"\'"+result[i].item.Course+ "\'"+"," +"\'"+result[i].item.Instructor+ "\'"+")\" />" +"</div></div>");
+    }
+  }
+});
+}
+
 function searchCourse(){
   var quarter = document.getElementById('quarter').value;;
   var courseLevel = document.getElementById('course-level').value;
@@ -69,7 +125,7 @@ function searchCourse(){
     {$or: [{ Course: course }, { Instructor: instructor },{ Quarter: quarter },{ Course_Level: courseLevel}]}
     ]
   });
-}
+  }
 
   const MAXDISPLAYNUM = 50;
 
@@ -114,8 +170,25 @@ function BarChart(data, {
   color = "currentColor" // bar fill color
 } = {}) {
   // Compute values.
-  const X = d3.map(data, x);
-  const Y = d3.map(data, y);
+  var X = d3.map(data, x);
+  var Y = d3.map(data, y);
+
+  // Reorder X, Y
+  var newX = [];
+  var newY = [];
+  const possibleGrades = ["A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "D-", "F","P","NP"];
+  for (var j = 0; j < possibleGrades.length; j++){
+    for (var i = 0; i < X.length; i++){
+      if (X[i] == possibleGrades[j]){
+        newX.push(X[i]);
+        newY.push(Y[i]);
+      }
+    }
+  }
+  // Reassign X, Y
+  X = newX;
+  Y = newY;
+
 
   // Compute default domains, and unique the x-domain.
   if (xDomain === undefined) xDomain = X;
