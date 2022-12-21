@@ -1,6 +1,15 @@
+const possibleGrades = ["A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "D-", "F","P","NP"];
+
 function findCourse(da,quarter,courseLevel,course,instructor){
   var course = da.filter(function(d){
       return d.quarter == quarter && d.courseLevel == courseLevel && d.course == course && d.instructor == instructor
+  })
+  return course
+}
+
+function findProfessor(da,instructor){
+  var course = da.filter(function(d){
+      return  d.instructor == instructor;
   })
   return course
 }
@@ -15,6 +24,49 @@ function readTextFile(file, callback) {
       }
   }
   rawFile.send(null);
+}
+
+function searchProfessor(){
+  var instructor = document.getElementById('instructor').value;
+  readTextFile("./professors.json", function(text){
+  var data = JSON.parse(text);
+  const options = {
+    // isCaseSensitive: false,
+    // includeScore: false,
+    shouldSort: true,
+    includeMatches: true,
+    findAllMatches: true,
+    // minMatchCharLength: 2,
+    // location: 0,
+     threshold: 0.6,
+    // distance: 5,
+    // useExtendedSearch: false,
+    // ignoreLocation: false,
+    // ignoreFieldNorm: false,
+    // fieldNormWeight: 1,
+    //limit:50,
+    keys: [
+      "Instructor"
+    ]
+  };
+  
+  const fuse = new Fuse(data, options);
+  var result = fuse.search({
+    $or: [{ Instructor: instructor }]
+  });
+
+  const MAXDISPLAYNUM = 50;
+
+  if (result.length == 0){
+    $("#cards").html("No result found");
+  }
+  else{
+    $("#cards").html("");
+    for (var i = 0; i <= MAXDISPLAYNUM; i++){
+      $("#cards").html($('#cards').html() + "<div class=\"column\"><div class=\"card\"><p id = \"card"+i+"\">"  + result[i].item.Instructor + "</p>"+ "<input type=\"button\" value=\"Render\" onclick=\"drawProfessor(" +"\'"+result[i].item.Instructor+ "\'"+")\" />" +"</div></div>");
+    }
+  }
+});
 }
 
 function searchCourse(){
@@ -62,7 +114,7 @@ function searchCourse(){
     {$or: [{ Course: course }, { Instructor: instructor },{ Quarter: quarter },{ Course_Level: courseLevel}]}
     ]
   });
-}
+  }
 
   const MAXDISPLAYNUM = 50;
 
@@ -86,7 +138,7 @@ function clearRender(){
   $("#graphs").html("");
 }
 
-function BarChart(data, {
+function BarChart(data,callType, {
   x = (d, i) => i, // given d in data, returns the (ordinal) x-value
   y = d => d, // given d in data, returns the (quantitative) y-value
   title, // given d in data, returns the title text
@@ -106,14 +158,16 @@ function BarChart(data, {
   yLabel, // a label for the y-axis
   color = "currentColor" // bar fill color
 } = {}) {
+
   // Compute values.
   var X = d3.map(data, x);
   var Y = d3.map(data, y);
 
+
   // Reorder X, Y
   var newX = [];
   var newY = [];
-  const possibleGrades = ["A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "D-", "F","P","NP"];
+  
   for (var j = 0; j < possibleGrades.length; j++){
     for (var i = 0; i < X.length; i++){
       if (X[i] == possibleGrades[j]){
@@ -232,23 +286,65 @@ function BarChart(data, {
   svg.append("g")
       .attr("transform", `translate(0,${height - marginBottom})`)
       .call(xAxis);
-
-  svg.append("text")
+  if (callType == "drawCourse"){
+    svg.append("text")
+        .attr("x", (width / 2))             
+        .attr("y", 20)
+        .attr("text-anchor", "middle")  
+        .style("font-size", "14px") 
+        .text(data[0].quarter + "," + data[0].courseLevel + "," + data[0].course + "," + data[0].instructor); 
+  }
+  else if (callType == "drawProfessor"){
+    svg.append("text")
       .attr("x", (width / 2))             
       .attr("y", 20)
       .attr("text-anchor", "middle")  
       .style("font-size", "14px") 
-      .text(data[0].quarter + "," + data[0].courseLevel + "," + data[0].course + "," + data[0].instructor); 
+      .text(data[0].instructor); 
+  }
 
   svg.append("text")
       .attr("x", (width / 2)+40)             
       .attr("y", 40)
       .attr("text-anchor", "middle")  
       .style("font-size", "14px") 
-      .text("Average GPA: " + GPA);
+      .text("Average GPA: " + GPA +", Total Students: " + sumOfStudent);
       
   return svg.node();
 };
+
+
+function drawProfessor(instructor) {
+
+  //loading the data
+  // Quarter,Course_Level,Course,Instructor,Grade_Given,Sum_of_Student_Count
+  d3.csv("grades2.csv",function(d){
+      return {
+          quarter: d.Quarter,
+          courseLevel: d.Course_Level,
+          course: d.Course,
+          instructor: d.Instructor,
+          grade: d.Grade_Given,
+          studentCount: +d.Sum_of_Student_Count,
+          courseNumber: d.Course_Number,
+          department: d.Department
+      }
+  }).then(function(data){
+    var target = findProfessor(data,instructor);
+    chart = BarChart(target,"drawProfessor", {
+      x: d => d.grade,
+      y: d => d.studentCount,
+      yLabel: "#Student",
+      width: 500,
+      height: 300,
+      color: "steelblue"
+    });
+
+    //append the chart to the body of the html page
+    document.getElementById("graphs").appendChild(chart);
+    
+  });
+}
 
 
 function drawCourse(quarter,courseLevel,course,instructor) {
@@ -269,7 +365,7 @@ function drawCourse(quarter,courseLevel,course,instructor) {
   }).then(function(data){
     var target = findCourse(data,quarter,courseLevel,course,instructor);
 
-    chart = BarChart(target, {
+    chart = BarChart(target,"drawCourse", {
       x: d => d.grade,
       y: d => d.studentCount,
       yLabel: "#Student",
