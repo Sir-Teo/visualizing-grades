@@ -19,7 +19,7 @@ npm install fuse.js
 ## Files
 
 - `\notebook` contains the notebooks for analysis scripts
-- `\grades2.csv` is the data
+- `grades2.csv` is the data
 - `index.html` is the index page
 
 ## Exploratory Data Analysis

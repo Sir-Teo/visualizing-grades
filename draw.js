@@ -163,11 +163,11 @@ function BarChart(data,callType, {
   var X = d3.map(data, x);
   var Y = d3.map(data, y);
 
-  console.log(X);
 
   // Reorder X, Y
   var newX = [];
   var newY = [];
+  
   for (var j = 0; j < possibleGrades.length; j++){
     for (var i = 0; i < X.length; i++){
       if (X[i] == possibleGrades[j]){
