@@ -5,6 +5,13 @@ function findCourse(da,quarter,courseLevel,course,instructor){
   return course
 }
 
+function findProfessor(da,instructor){
+  var course = da.filter(function(d){
+      return  d.instructor == instructor;
+  })
+  return course
+}
+
 function readTextFile(file, callback) {
   var rawFile = new XMLHttpRequest();
   rawFile.overrideMimeType("application/json");
@@ -232,6 +239,41 @@ function BarChart(data, {
       
   return svg.node();
 };
+
+
+function drawProfessor(instructor) {
+
+  //loading the data
+  // Quarter,Course_Level,Course,Instructor,Grade_Given,Sum_of_Student_Count
+  d3.csv("grades2.csv",function(d){
+      return {
+          quarter: d.Quarter,
+          courseLevel: d.Course_Level,
+          course: d.Course,
+          instructor: d.Instructor,
+          grade: d.Grade_Given,
+          studentCount: +d.Sum_of_Student_Count,
+          courseNumber: d.Course_Number,
+          department: d.Department
+      }
+  }).then(function(data){
+    var target = findProfessor(data,instructor);
+    console.log(target)
+    /*
+    chart = BarChart(target, {
+      x: d => d.grade,
+      y: d => d.studentCount,
+      yLabel: "#Student",
+      width: 500,
+      height: 300,
+      color: "steelblue"
+    });
+
+    //append the chart to the body of the html page
+    document.getElementById("graphs").appendChild(chart);
+    */
+  });
+}
 
 
 function drawCourse(quarter,courseLevel,course,instructor) {
