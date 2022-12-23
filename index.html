@@ -167,13 +167,10 @@
 					<option value = "W&L  "> W&L   </option>
 					<option value = "WRIT "> WRIT  </option>
 				</select>
-				<script>document.getElementById('dept').value = 'MATH ';</script>
 				<label for="course-number">Course No. (Number only)</label>
-				<input id="course-number">
-				<script>document.getElementById('course-number').value = '4A';</script>
+				<input id="course-number" placeholder = "4A">
 				<label for="instructor">Instructor Last Name: (optional, as appear on GOLD) </label>
-				<input id="instructor">
-				<script>document.getElementById('instructor').value = 'HAJOUJI';</script>
+				<input id="instructor" placeholder = "Hajouji">
 				<input type="button" value="Search" onclick="searchCourse()" />
 				<input type="button" value="Search for this professor" onclick="searchProfessor()" />
 				<input type="button" value="Clear Below" onclick="clearSearch()" />
